@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Order Your Website | AYUSH WEB STUDIO</title>
+
+<link rel="stylesheet" href="script.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header>
+
+<nav>
+
+<div class="logo">
+
+<i class="fa-solid fa-code"></i>
+
+<span>AYUSH WEB STUDIO</span>
+
+</div>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="#order">Order</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+
+
+<section class="hero" id="order">
+
+<div class="hero-content">
+
+<h1>Order Your Dream Website</h1>
+
+<p>
+
+Fill in the details below to place your order.
+Cash on Delivery is available.
+Coupon codes can give you exciting discounts.
+You can also choose to receive a QR Code for your website for just ₹20 extra.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<section class="about">
+
+<h2>Website Order Form</h2>
+
+<form id="orderForm">
+
+<label>
+
+Full Name
+
+</label>
+
+<input
+type="text"
+id="customerName"
+placeholder="Enter your full name"
+required>
+
+<br><br>
+
+<label>
+
+Website Type
+
+</label>
+
+<select id="websiteType" required>
+
+<option value="">Select Website Type</option>
+
+<option value="Business Website">Business Website</option>
+
+<option value="E-Commerce Website">E-Commerce Website</option>
+
+<option value="Portfolio Website">Portfolio Website</option>
+
+<option value="Blog / News Website">Blog / News Website</option>
+
+<option value="Educational Website">Educational Website</option>
+
+<option value="Personal Website">Personal Website</option>
+
+</select>
+
+<br><br>
+<label>
+
+Website Package
+
+</label>
+
+<select id="packageType" required>
+
+<option value="">Select Package</option>
+
+<option value="50">Simple Static - ₹50.00</option>
+
+<option value="70">Basic Animations - ₹70.00</option>
+
+<option value="100">Pro Animations - ₹100.00</option>
+
+<option value="140">Ultra Website - ₹140.00</option>
+
+<option value="160">Max Website - ₹160.00</option>
+
+<option value="200">Ultra Max - ₹200.00</option>
+
+<option value="250">Pro Max - ₹250.00</option>
+
+<option value="300">Ultra Pro Max - ₹300.00</option>
+
+</select>
+
+<br><br>
+
+<label>
+
+Coupon Code (Optional)
+
+</label>
+
+<input
+type="text"
+id="couponCode"
+placeholder="Example: AK47">
+
+<br><br>
+
+<label>
+
+<input
+type="checkbox"
+id="qrCode">
+
+Add Website QR Code (+₹20)
+
+</label>
+
+<br><br>
+
+<label>
+
+Payment Method
+
+</label>
+
+<select id="paymentMethod" required>
+
+<option value="Cash on Delivery">
+
+Cash on Delivery (COD)
+
+</option>
+
+</select>
+
+<br><br>
+
+<div class="glass" style="padding:20px;">
+
+<h2>Estimated Cost</h2>
+
+<p><strong>Base Price:</strong> ₹<span id="basePrice">0</span></p>
+
+<p><strong>Discount:</strong> ₹<span id="discount">0</span></p>
+
+<p><strong>QR Code Charge:</strong> ₹<span id="qrCharge">0</span></p>
+
+<hr>
+
+<h2>
+
+Total Price:
+₹<span id="totalPrice">0</span>
+
+</h2>
+
+</div>
+
+<br>
+
+<button
+type="button"
+class="btn"
+onclick="calculatePrice()">
+
+Calculate Price
+
+</button>
+
+<button
+type="submit"
+class="btn2">
+
+Confirm Order
+
+</button>
+
+</form>
+
+</section>
+<section class="about">
+
+<h2>Order Summary</h2>
+
+<div class="glass" style="padding:25px; margin-top:20px;">
+
+<p><strong>Name:</strong> <span id="summaryName">-</span></p>
+
+<p><strong>Website Type:</strong> <span id="summaryType">-</span></p>
+
+<p><strong>Package:</strong> <span id="summaryPackage">-</span></p>
+
+<p><strong>Coupon:</strong> <span id="summaryCoupon">None</span></p>
+
+<p><strong>QR Code:</strong> <span id="summaryQR">No</span></p>
+
+<p><strong>Payment:</strong> Cash on Delivery</p>
+
+<h2>Total: ₹<span id="summaryTotal">0</span></h2>
+
+</div>
+
+</section>
+
+
+
+<section class="about">
+
+<h2>Saved Orders</h2>
+
+<p>
+All confirmed orders placed from this browser
+will appear below.
+</p>
+
+<div
+id="savedOrders"
+class="glass"
+style="padding:25px; min-height:180px; margin-top:20px;">
+
+<p>No orders yet.</p>
+
+</div>
+
+</section>
+
+
+
+<footer>
+
+<h3>AYUSH WEB STUDIO</h3>
+
+<p>
+
+Developed by <strong>AYUSH KUMAR NAVIK</strong>
+
+</p>
+
+<p>
+
+Thank you for choosing our website development service.
+
+</p>
+
+</footer>
+
+
+
+<script>
+
+const form = document.getElementById("orderForm");
+
+const packageType = document.getElementById("packageType");
+
+const couponCode = document.getElementById("couponCode");
+
+const qrCode = document.getElementById("qrCode");
+
+let finalPrice = 0;
+function calculatePrice() {
+
+    let basePrice = Number(packageType.value);
+
+    if (!basePrice) {
+        alert("Please select a website package.");
+        return;
+    }
+
+    let discount = 0;
+
+    const coupon = couponCode.value.trim().toUpperCase();
+
+    if (coupon === "AK47") {
+
+        discount = basePrice * 0.10;
+
+    } else if (coupon === "AKN") {
+
+        discount = basePrice * 0.15;
+
+    } else if (coupon === "20ON") {
+
+        discount = basePrice * 0.20;
+
+    }
+
+    let qrCharge = qrCode.checked ? 20 : 0;
+
+    finalPrice = basePrice - discount + qrCharge;
+
+    document.getElementById("basePrice").innerText =
+        basePrice.toFixed(2);
+
+    document.getElementById("discount").innerText =
+        discount.toFixed(2);
+
+    document.getElementById("qrCharge").innerText =
+        qrCharge.toFixed(2);
+
+    document.getElementById("totalPrice").innerText =
+        finalPrice.toFixed(2);
+
+    document.getElementById("summaryName").innerText =
+        document.getElementById("customerName").value || "-";
+
+    document.getElementById("summaryType").innerText =
+        document.getElementById("websiteType").value || "-";
+
+    document.getElementById("summaryPackage").innerText =
+        packageType.options[packageType.selectedIndex].text;
+
+    document.getElementById("summaryCoupon").innerText =
+        coupon === "" ? "None" : coupon;
+
+    document.getElementById("summaryQR").innerText =
+        qrCode.checked ? "Yes (+₹20)" : "No";
+
+    document.getElementById("summaryTotal").innerText =
+        finalPrice.toFixed(2);
+
+}
+form.addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    calculatePrice();
+
+    const order = {
+
+        name: document.getElementById("customerName").value.trim(),
+
+        websiteType: document.getElementById("websiteType").value,
+
+        packageName: packageType.options[packageType.selectedIndex].text,
+
+        coupon: couponCode.value.trim().toUpperCase() || "None",
+
+        qrCode: qrCode.checked ? "Yes (+₹20)" : "No",
+
+        payment: "Cash on Delivery",
+
+        total: finalPrice.toFixed(2),
+
+        date: new Date().toLocaleString()
+
+    };
+
+    const orders =
+        JSON.parse(localStorage.getItem("ayushWebsiteOrders")) || [];
+
+    orders.push(order);
+
+    localStorage.setItem(
+        "ayushWebsiteOrders",
+        JSON.stringify(orders)
+    );
+
+    alert(
+        "🎉 Order Confirmed Successfully!\n\n" +
+        "Thank you for ordering from AYUSH WEB STUDIO."
+    );
+
+    displayOrders();
+
+    form.reset();
+
+    document.getElementById("basePrice").innerText = "0";
+    document.getElementById("discount").innerText = "0";
+    document.getElementById("qrCharge").innerText = "0";
+    document.getElementById("totalPrice").innerText = "0";
+    document.getElementById("summaryName").innerText = "-";
+    document.getElementById("summaryType").innerText = "-";
+    document.getElementById("summaryPackage").innerText = "-";
+    document.getElementById("summaryCoupon").innerText = "None";
+    document.getElementById("summaryQR").innerText = "No";
+    document.getElementById("summaryTotal").innerText = "0";
+
+});
+function displayOrders() {
+
+    const container = document.getElementById("savedOrders");
+
+    const orders =
+        JSON.parse(localStorage.getItem("ayushWebsiteOrders")) || [];
+
+    if (orders.length === 0) {
+
+        container.innerHTML =
+            "<p>No orders have been placed yet.</p>";
+
+        return;
+
+    }
+
+    let html = "";
+
+    orders.forEach((order, index) => {
+
+        html += `
+
+        <div class="glass" style="padding:20px; margin-bottom:20px;">
+
+            <h3>Order #${index + 1}</h3>
+
+            <p><strong>Name:</strong> ${order.name}</p>
+
+            <p><strong>Website Type:</strong> ${order.websiteType}</p>
+
+            <p><strong>Package:</strong> ${order.packageName}</p>
+
+            <p><strong>Coupon:</strong> ${order.coupon}</p>
+
+            <p><strong>QR Code:</strong> ${order.qrCode}</p>
+
+            <p><strong>Payment:</strong> ${order.payment}</p>
+
+            <p><strong>Total Price:</strong> ₹${order.total}</p>
+
+            <p><strong>Ordered On:</strong> ${order.date}</p>
+
+        </div>
+
+        `;
+
+    });
+
+    container.innerHTML = html;
+
+}
+
+displayOrders();
